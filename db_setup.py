@@ -14,6 +14,7 @@ try:
         sql = """CREATE TABLE IF NOT EXISTS bec.orders(id int NOT NULL AUTO_INCREMENT,
                                                        name VARCHAR(50) NOT NULL,
                                                        location VARCHAR(50) NOT NULL,
+                                                       pickup_time TIME NOT NULL,
                                                        bec_count int UNSIGNED NOT NULL,
                                                        ec_count int UNSIGNED NOT NULL,
                                                        be_count int UNSIGNED NOT NULL,

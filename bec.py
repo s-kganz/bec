@@ -1,4 +1,5 @@
 from flask import Flask, request, session, flash, redirect, render_template
+
 from forms import OrderForm
 
 from secrets.config import Config, TestingConfig, DebugConfig
@@ -21,6 +22,7 @@ def getOrder():
     if form.validate_on_submit():
         DB.add_order(form.name.data,
                      form.location.data,
+                     form.pickup.data,
                      form.bec.data,
                      form.ec.data,
                      form.be.data,

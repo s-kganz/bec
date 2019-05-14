@@ -15,14 +15,14 @@ class DBHelper():
                                password=password,
                                db=database)
     
-    def add_order(self, name, location, bec, ec, be, comment):
+    def add_order(self, name, location, pickup, bec, ec, be, comment):
         ''' Add a new sandwich order to database. '''
-        sql = '''INSERT INTO orders (name, location, bec_count, ec_count, be_count, comment)
-               VALUES (%s, %s, %s, %s, %s, %s);'''
+        sql = '''INSERT INTO orders (name, location, pickup_time, bec_count, ec_count, be_count, comment)
+               VALUES (%s, %s, %s, %s, %s, %s, %s);'''
         conn = self.connection()
         try:
             with conn.cursor() as cursor:
-                cursor.execute(sql, (name, location, bec, ec, be, comment))
+                cursor.execute(sql, (name, location, pickup, bec, ec, be, comment))
             conn.commit()
         except Exception as e:
             print(e)
