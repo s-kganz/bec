@@ -1,0 +1,11 @@
+<body>
+    <form method="POST", action="/order">
+        {% for iform in forms %}
+            {{iform.hidden_tag()}}
+            {{iform.itemType.label}} {{iform.itemType()}}
+            {{iform.comment.label}} {{iform.comment()}}
+            <br>
+        {% endfor %}
+        <input type='submit', value="Go"></input>
+    </form>
+</body>
