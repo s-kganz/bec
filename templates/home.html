@@ -1,15 +1,21 @@
+<head>
+    <link rel="stylesheet" type="text/css" 
+          href="{{ url_for('static', filename='styles/style.css') }}">
+</head>
+
+
 <body>
-    <h1>BEC Order System</h1>
+    <h1 class="title">BEC Order System</h1>
     <hr>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
-                <li>{{ message }}</li>
+                <li class="message">{{ message }}</li>
             {% endfor %}
         {% endif %}
     {% endwith %}
     <br>
-    <form method="GET" action='/order'>
+    <form class="button" method="GET" action='/order'>
         <input type="submit" value="Place Order"></input>
     </form>
 </body>
