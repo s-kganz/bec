@@ -22,7 +22,7 @@ class DBHelper():
         conn = self.connection()
         try:
             with conn.cursor() as cursor:
-                cursor.execute(sql, (name, loc, bec, ec, be, comment))
+                cursor.execute(sql, (name, location, bec, ec, be, comment))
             conn.commit()
         except Exception as e:
             print(e)
