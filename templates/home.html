@@ -1,5 +1,14 @@
 <body>
     <h1>BEC Order System</h1>
+    <hr>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <br>
     <form method="GET" action='/order'>
         <input type="submit" value="Place Order"></input>
     </form>
