@@ -1,11 +1,22 @@
 <body>
     <form method="POST", action="/order">
-        {% for iform in forms %}
-            {{iform.hidden_tag()}}
-            {{iform.itemType.label}} {{iform.itemType()}}
-            {{iform.comment.label}} {{iform.comment()}}
+        <h1>Fill out Order Form Below</h1>
+        {% for field in form.errors %}
+            {{ field }}
             <br>
         {% endfor %}
+        <br>
+        {{ form.csrf_token }}
+        {{ form.name.label }}
+        {{ form.name() }}
+        <br>
+        {{ form.location.label }}
+        {{ form.location }}
+        <br>
+        {{ form.bec.label }} {{ form.bec() }}
+        {{ form.ec.label }} {{ form.ec() }}
+        {{ form.be.label }} {{ form.be() }}
+        <br>
         <input type='submit', value="Go"></input>
     </form>
 </body>

@@ -1,17 +1,18 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField
-from wtforms.validators import DataRequired
+from wtforms import StringField, TextAreaField, SelectField
+from wtforms.validators import DataRequired, Optional, NumberRange
 
+MAX_SANDWICHES = 10
 
-class ItemForm(FlaskForm):
-    formName = "Item form"
-    itemType = SelectField(
-        "Sandwich Type",
-        choices=[
-            ("bec", "Bacon Egg and Cheese"),
-            ("ec", "Egg and Cheese"),
-            ("other", "Custom Order"),
-        ],
-        validators=[DataRequired()]
-    )
-    comment = StringField("Requests", validators=None)
+class OrderForm(FlaskForm):
+    name = StringField("Order Name", validators=[DataRequired()])
+    location = StringField("Delivery Location", validators=[DataRequired()])
+
+    sandChoices = [(str(i), i) for i in range(0, MAX_SANDWICHES+1)]
+
+    bec = SelectField(label="BECs: ", choices=sandChoices)
+    ec = SelectField(label="ECs: ", choices=sandChoices)
+    be = SelectField(label="BEs: ", choices=sandChoices)
+
+    comments = TextAreaField(
+        "Other comments/requests:", validators=[Optional()])
