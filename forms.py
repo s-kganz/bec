@@ -6,6 +6,8 @@ from wtforms.validators import DataRequired, Optional, NumberRange
 MAX_SANDWICHES = 10
 
 class OrderForm(FlaskForm):
+    """ FlaskForm for recording single sandwich order """
+
     name = StringField("Order Name", validators=[DataRequired()])
     location = StringField("Delivery Location", validators=[DataRequired()])
 
@@ -16,7 +18,7 @@ class OrderForm(FlaskForm):
     for i in range(0, 4):
         start = start + datetime.timedelta(minutes=30)
         timestr = start.strftime("%H:%M")
-        timeChoices.append((timestr, timestr)) # needs to be tuple of str
+        timeChoices.append((timestr, timestr + " AM")) # needs to be tuple of str
     
     pickup = SelectField(label="Pickup time: ", 
                          choices=timeChoices,
@@ -29,3 +31,8 @@ class OrderForm(FlaskForm):
 
     comments = TextAreaField(
         "Other comments/requests:", validators=[Optional()])
+
+class LoginForm(FlaskForm):
+    """ FlaskForm for logging user into backend """
+    user = StringField("Username: ", validators=[DataRequired()])
+    password = StringField("Password: ", validators=[DataRequired()])

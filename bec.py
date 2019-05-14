@@ -1,6 +1,5 @@
 from flask import Flask, request, session, flash, redirect, render_template
-
-from forms import OrderForm
+from forms import OrderForm, LoginForm
 
 from secrets.config import Config, TestingConfig, DebugConfig
 
@@ -15,6 +14,14 @@ else:
     from db_helper import DBHelper
 
 DB = DBHelper()
+
+@app.route('/login', methods=["POST", "GET"])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        # Check that passwords match
+        pass
+    return render_template("login.html", form=form)
 
 @app.route('/order', methods=["POST", "GET"])
 def getOrder():
