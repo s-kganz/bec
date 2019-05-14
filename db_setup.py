@@ -7,7 +7,7 @@ connection = pymysql.connect(host="localhost",
 
 try:
     with connection.cursor() as cursor:
-        sql = "DROP DATABASE IF EXISTS BEC"
+        sql = "DROP DATABASE IF EXISTS bec"
         cursor.execute(sql)
         sql = "CREATE DATABASE IF NOT EXISTS bec"
         cursor.execute(sql)
