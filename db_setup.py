@@ -1,5 +1,6 @@
 import pymysql
-from secrets.dbconfig import password, username
+from secrets.dbconfig import db_pass, db_user, bec_user, bec_pass
+from werkzeug.security import generate_password_hash, check_password_hash
 
 connection = pymysql.connect(host="localhost",
                              user=username,
@@ -26,12 +27,21 @@ try:
              """
         cursor.execute(sql)
         # Create user table
+        # These are all trusted users that can access the backend
         sql = """CREATE TABLE IF NOT EXISTS bec.users(user VARCHAR(12) NOT NULL,
-                                                      passhash VARCHAR(100) NOT NULL,
+                                                      passhash VARCHAR(200) NOT NULL,
                                                       ts TIMESTAMP NOT NULL,
-                                                      PRIMARY KEY (user))
+                                                      id INT AUTO_INCREMENT NOT NULL,
+                                                      PRIMARY KEY (id))
               """
         cursor.execute(sql)
+
+        # Add admin user to table, for now this will be the only entry for
+        # using backend operations
+        sql = """ INSERT INTO bec.users (user, passhash) VALUES
+                  (%s, %s); """
+        cursor.execute(sql, (admin_user, generate_password_hash(admin_pass)))
+
     connection.commit()
 finally:
     connection.close()
