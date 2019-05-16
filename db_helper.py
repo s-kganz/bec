@@ -21,7 +21,7 @@ class User(UserMixin):
 
 class DBHelper():
     ''' Helper class to run mysql operations in Python
-        script '''
+        context '''
 
     @staticmethod
     def connection(database="bec"):
@@ -70,11 +70,24 @@ class DBHelper():
         # Securely compare
         return u, check_password_hash(u.passhash, password)
 
+class MockHelper():
+    @staticmethod
+    def connection():
+        return None
+    def add_order(self, name, location, pickup, bec, ec, be, comment):
+        pass
+    def clear_all(self):
+        pass
+    def check_passhash(self, user, password):
+        return password == '1234'
 
 @login_manager.user_loader
 def get_user(username):
         ''' Query user table for username and return new User object if found '''
         conn = DBHelper.connection()
+        if not conn:
+            # Assume using dummy database
+            return User("John Smith", '1234')
         try:
             with conn.cursor(pymysql.cursors.DictCursor) as cursor:
                 sql = "SELECT * FROM users WHERE user=%s;"
