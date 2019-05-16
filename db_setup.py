@@ -3,8 +3,8 @@ from secrets.dbconfig import db_pass, db_user, bec_user, bec_pass
 from werkzeug.security import generate_password_hash, check_password_hash
 
 connection = pymysql.connect(host="localhost",
-                             user=username,
-                             password=password)
+                             user=db_user,
+                             password=db_pass)
 
 try:
     with connection.cursor() as cursor:
@@ -40,7 +40,7 @@ try:
         # using backend operations
         sql = """ INSERT INTO bec.users (user, passhash) VALUES
                   (%s, %s); """
-        cursor.execute(sql, (admin_user, generate_password_hash(admin_pass)))
+        cursor.execute(sql, (bec_user, generate_password_hash(bec_pass)))
 
     connection.commit()
 finally:
