@@ -70,7 +70,7 @@ class DBHelper():
         # Securely compare
         return u, check_password_hash(u.passhash, password)
 
-class MockHelper():
+class MockHelper(DBHelper):
     @staticmethod
     def connection():
         return None
