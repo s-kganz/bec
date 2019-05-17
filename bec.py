@@ -23,6 +23,11 @@ DB = DBHelper()
 
 @app.route('/login', methods=["POST", "GET"])
 def login():
+    ''' 
+    Login view. Uses flask-wtf form to record user/pass in
+    plaintext, then uses werkzeug hash function to 
+    compare with hash stored in database. 
+    '''
     form = LoginForm()
     if form.validate_on_submit():
         # Check credentials
@@ -39,6 +44,10 @@ def login():
 
 @app.route('/order', methods=["POST", "GET"])
 def get_order():
+    ''' 
+    Sandwich order view. Fill out simple form with name,
+    pickup location, etc. and then add to DB.
+    '''
     form = OrderForm()
     if form.validate_on_submit():
         DB.add_order(form.name.data,
@@ -55,6 +64,10 @@ def get_order():
 @app.route('/allorders', methods=["GET"])
 @login_required
 def show_all_orders():
+    '''
+    Retrieve all orders in database and present them as HTML table,
+    ordered by time.
+    '''
     orders_by_time = DB.get_orders_by_time()
     return render_template("all_orders.html", orders=orders_by_time)
     

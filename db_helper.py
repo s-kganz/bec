@@ -25,9 +25,11 @@ class DBHelper():
 
     @staticmethod
     def connection(database="bec"):
-        ''' Create connection with database. Should
-            be called for every change as opposed
-            to having once continuous connection '''
+        ''' 
+        Create connection with database. Should
+        be called for every change as opposed
+        to having once continuous connection 
+        '''
 
         return pymysql.connect(user=db_user,
                                password=db_pass,
@@ -35,8 +37,9 @@ class DBHelper():
 
     def add_order(self, name, location, pickup, bec, ec, be, comment):
         ''' Add a new sandwich order to database. '''
-        sql = '''INSERT INTO orders (name, location, pickup_time, bec_count, ec_count, be_count, comment)
-               VALUES (%s, %s, %s, %s, %s, %s, %s);'''
+        sql = '''INSERT INTO orders 
+                 (name, location, pickup_time, bec_count, ec_count, be_count, comment)
+                 VALUES (%s, %s, %s, %s, %s, %s, %s);'''
         conn = self.connection()
         try:
             with conn.cursor() as cursor:
@@ -49,11 +52,16 @@ class DBHelper():
             conn.close()
     
     def get_orders_by_time(self):
+        '''
+        Get a dictionary of sandwich orders where keys are timeslots
+        for pickup.
+        '''
         conn = self.connection()
         by_time = dict()
         try:
             with conn.cursor(pymysql.cursors.DictCursor) as cursor:
-                for time in ["08:00:00", "08:30:00", "09:00:00", "09:30:00"]: # TODO make this cleaner
+                #TODO make this cleaner. Maybe put times in db_config?
+                for time in ["08:00:00", "08:30:00", "09:00:00", "09:30:00"]:
                     cursor.execute('''SELECT name, location, pickup_time, bec_count, ec_count, be_count 
                                       FROM orders WHERE pickup_time=%s;''', time)
                     by_time[time] = cursor.fetchall()
@@ -78,6 +86,10 @@ class DBHelper():
             conn.close()
 
     def check_passhash(self, user, password):
+        '''
+        Use werkzeug hash utils to compare given password
+        with hash stored in database.
+        '''
         # Get user object
         u = get_user(user)
         if not u:
