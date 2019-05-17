@@ -47,6 +47,21 @@ class DBHelper():
             print(e)
         finally:
             conn.close()
+    
+    def get_orders_by_time(self):
+        conn = self.connection()
+        by_time = dict()
+        try:
+            with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+                for time in ["08:00:00", "08:30:00", "09:00:00", "09:30:00"]: # TODO make this cleaner
+                    cursor.execute('''SELECT name, location, pickup_time, bec_count, ec_count, be_count 
+                                      FROM orders WHERE pickup_time=%s;''', time)
+                    by_time[time] = cursor.fetchall()
+        except Exception as e:
+            print(e)
+        finally:
+            conn.close()
+        return by_time
 
     def clear_all(self):
         ''' Clear all entries from database '''

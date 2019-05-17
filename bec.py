@@ -1,5 +1,5 @@
 from flask import Flask, request, session, flash, redirect, render_template
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, login_required
 from forms import OrderForm, LoginForm
 from os import urandom as make_key
 
@@ -38,7 +38,7 @@ def login():
     return render_template("login.html", form=form)
 
 @app.route('/order', methods=["POST", "GET"])
-def getOrder():
+def get_order():
     form = OrderForm()
     if form.validate_on_submit():
         DB.add_order(form.name.data,
@@ -52,9 +52,15 @@ def getOrder():
         return redirect('/')
     return render_template("order.html", form=form)
 
+@app.route('/allorders', methods=["GET"])
+@login_required
+def show_all_orders():
+    orders_by_time = DB.get_orders_by_time()
+    return render_template("all_orders.html", orders=orders_by_time)
+    
 
 @app.route('/', methods=['GET'])
-def hello():
+def home():
     return render_template("home.html")
 
 if __name__ == "__main__":
