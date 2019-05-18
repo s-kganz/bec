@@ -41,15 +41,18 @@ class DBHelper():
                  (name, location, pickup_time, bec_count, ec_count, be_count, comment, recurring)
                  VALUES (%s, %s, %s, %s, %s, %s, %s, %s);'''
         conn = self.connection()
+        ret = None
         try:
             with conn.cursor() as cursor:
                 cursor.execute(
                     insert, (name, location, pickup, bec, ec, be, comment, recurring))
+                ret = cursor.lastrowid
             conn.commit()
         except Exception as e:
             print(e)
         finally:
             conn.close()
+        return ret
     
     def get_orders_by_time(self):
         '''

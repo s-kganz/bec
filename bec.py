@@ -1,3 +1,4 @@
+from db_helper import login_manager
 from flask import Flask, request, session, flash, redirect, render_template
 from flask_login import current_user, login_user, login_required
 from forms import OrderForm, LoginForm
@@ -15,11 +16,11 @@ if app.config["DEBUG"]:
 else:
     from db_helper import DBHelper
 
-from db_helper import login_manager
 login_manager.init_app(app)
-login_manager.login_view='login'
+login_manager.login_view = 'login'
 
 DB = DBHelper()
+
 
 @app.route('/login', methods=["POST", "GET"])
 def login():
@@ -42,6 +43,7 @@ def login():
             return render_template("home.html")
     return render_template("login.html", form=form)
 
+
 @app.route('/order', methods=["POST", "GET"])
 def get_order():
     ''' 
@@ -49,18 +51,20 @@ def get_order():
     pickup location, etc. and then add to DB.
     '''
     form = OrderForm()
+    order_id = None
     if form.validate_on_submit():
-        DB.add_order(form.name.data,
-                     form.location.data,
-                     form.pickup.data,
-                     form.bec.data,
-                     form.ec.data,
-                     form.be.data,
-                     form.comments.data,
-                     form.recurring.data)
-        flash("Thank you for your order!")
+        order_id = DB.add_order(form.name.data,
+                                form.location.data,
+                                form.pickup.data,
+                                form.bec.data,
+                                form.ec.data,
+                                form.be.data,
+                                form.comments.data,
+                                form.recurring.data)
+        flash("Thank you for your order! Your order number is {}".format(order_id))
         return redirect('/')
     return render_template("order.html", form=form)
+
 
 @app.route('/allorders', methods=["GET"])
 @login_required
@@ -71,11 +75,12 @@ def show_all_orders():
     '''
     orders_by_time = DB.get_orders_by_time()
     return render_template("all_orders.html", orders=orders_by_time)
-    
+
 
 @app.route('/', methods=['GET'])
 def home():
     return render_template("home.html")
+
 
 if __name__ == "__main__":
     app.run(host='localhost', port=5000)
