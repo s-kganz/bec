@@ -56,7 +56,8 @@ def get_order():
                      form.bec.data,
                      form.ec.data,
                      form.be.data,
-                     form.comments.data)
+                     form.comments.data,
+                     form.recurring.data)
         flash("Thank you for your order!")
         return redirect('/')
     return render_template("order.html", form=form)
