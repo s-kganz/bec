@@ -19,12 +19,15 @@
         {{ form.ec.label }} {{ form.ec() }}
         {{ form.be.label }} {{ form.be() }}
         <br>
-        <i>Add comments or special requests:</i>
+        <i>Add comments, special requests here:</i>
         <br>
         {{ form.comments() }}
         <br>
         {{ form.recurring.label }} {{ form.recurring() }}
         <br><br>
         <input type='submit', value="Go"></input>
+    </form>
+    <form method='GET' action='/'>
+        <input type="submit" value="Also Go">
     </form>
 </body>
