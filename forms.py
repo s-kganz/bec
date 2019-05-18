@@ -1,6 +1,6 @@
 import datetime
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SelectField
+from wtforms import BooleanField, StringField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, Optional, NumberRange
 
 MAX_SANDWICHES = 10
@@ -31,6 +31,8 @@ class OrderForm(FlaskForm):
 
     comments = TextAreaField(
         "Other comments/requests:", validators=[Optional()])
+    
+    recurring = BooleanField(label="Recurring Order? ")
 
 class LoginForm(FlaskForm):
     """ FlaskForm for logging user into backend """

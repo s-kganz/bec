@@ -35,16 +35,16 @@ class DBHelper():
                                password=db_pass,
                                db=database)
 
-    def add_order(self, name, location, pickup, bec, ec, be, comment):
+    def add_order(self, name, location, pickup, bec, ec, be, comment, recurring):
         ''' Add a new sandwich order to database. '''
         insert = '''INSERT INTO orders 
-                 (name, location, pickup_time, bec_count, ec_count, be_count, comment)
-                 VALUES (%s, %s, %s, %s, %s, %s, %s);'''
+                 (name, location, pickup_time, bec_count, ec_count, be_count, comment, recurring)
+                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s);'''
         conn = self.connection()
         try:
             with conn.cursor() as cursor:
                 cursor.execute(
-                    insert, (name, location, pickup, bec, ec, be, comment))
+                    insert, (name, location, pickup, bec, ec, be, comment, recurring))
             conn.commit()
         except Exception as e:
             print(e)

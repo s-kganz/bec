@@ -22,6 +22,7 @@ try:
                                                        ec_count int UNSIGNED NOT NULL,
                                                        be_count int UNSIGNED NOT NULL,
                                                        comment VARCHAR(1000),
+                                                       recurring BOOLEAN DEFAULT FALSE,
                                                        ts TIMESTAMP NOT NULL,
                                                        PRIMARY KEY (id))
              """

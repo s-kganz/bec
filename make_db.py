@@ -21,7 +21,8 @@ for i in range(30):
     bec = random.randrange(0, 11)
     ec = random.randrange(0, 11)
     be = random.randrange(0, 11)
-    line = " ".join([name, loc, time, str(bec), str(ec), str(be)])
+    rec = random.choice([False, False, False, True])
+    line = " ".join([name, loc, time, str(bec), str(ec), str(be), str(int(rec))])
     orders.append(line)
 
 connection = pymysql.connect(host='localhost',
@@ -36,8 +37,9 @@ try:
         connection.commit()
         for line in orders:
             fields = line.split(' ')
-            command = """INSERT INTO orders (name, location, pickup_time, bec_count, ec_count, be_count)
-                        VALUES (%s, %s, %s, %s, %s, %s)
+            command = """INSERT INTO orders 
+                         (name, location, pickup_time, bec_count, ec_count, be_count, recurring)
+                         VALUES (%s, %s, %s, %s, %s, %s, %s)
                     """
             cursor.execute(command, fields)
             connection.commit()
