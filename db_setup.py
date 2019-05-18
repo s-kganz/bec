@@ -42,6 +42,21 @@ try:
                   (%s, %s); """
         cursor.execute(sql, (bec_user, generate_password_hash(bec_pass)))
 
+        # Create statistics table, this tracks how many sandwiches were ordered from
+        # week to week
+
+        # New rows should be inserted here whenever non-recurring orders are purged
+        # Thursday night.
+        #TODO make script that purges orders, updates this table
+        sql = """CREATE TABLE IF NOT EXISTS bec.stats(id INT AUTO_INCREMENT NOT NULL,
+                                                      week DATE NOT NULL,
+                                                      bec_count INT UNSIGNED NOT NULL,
+                                                      ec_count INT UNSIGNED NOT NULL,
+                                                      be_count INT UNSIGNED NOT NULL,
+                                                      custom_count INT UNSIGNED NOT NULL,
+                                                      PRIMARY KEY (id))
+              """
+
     connection.commit()
 finally:
     connection.close()

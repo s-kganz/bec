@@ -37,14 +37,14 @@ class DBHelper():
 
     def add_order(self, name, location, pickup, bec, ec, be, comment):
         ''' Add a new sandwich order to database. '''
-        sql = '''INSERT INTO orders 
+        insert = '''INSERT INTO orders 
                  (name, location, pickup_time, bec_count, ec_count, be_count, comment)
                  VALUES (%s, %s, %s, %s, %s, %s, %s);'''
         conn = self.connection()
         try:
             with conn.cursor() as cursor:
                 cursor.execute(
-                    sql, (name, location, pickup, bec, ec, be, comment))
+                    insert, (name, location, pickup, bec, ec, be, comment))
             conn.commit()
         except Exception as e:
             print(e)
