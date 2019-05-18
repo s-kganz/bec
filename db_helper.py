@@ -73,8 +73,50 @@ class DBHelper():
         finally:
             conn.close()
         return by_time
+    
+    def get_orders_by_name(self, name):
+        '''
+        Query database for orders matching the given name
+        '''
+        conn = self.connection()
+        ret = None
+        try:
+            with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+                cursor.execute(''' SELECT name, location, pickup_time, bec_count, ec_count, be_count
+                                   FROM orders WHERE name=%s; ''', name)
+                ret = cursor.fetchall()
+        except Exception as e:
+            print(e)
+        finally:
+            conn.close()
+        return ret
+    
+    def delete_orders_by_name(self, name):
+        ''' Clear orders from DB matching name '''
+        conn = self.connection()
+        try:
+            with conn.cursor() as cursor:
+                cursor.execute("DELETE FROM orders WHERE name=%s", name)
+            conn.commit()
+        except Exception as e:
+            print(e)
+        finally:
+            conn.close()
 
-    def clear_all(self):
+    def delete_nonrecurring(self):
+        ''' Delete nonrecurring orders from database '''
+        conn = self.connection()
+        try:
+            with conn.cursor() as cursor:
+                sql = ''' DELETE FROM orders WHERE recurring = 0 '''
+                cursor.execute(sql)
+            conn.commit()
+        except Exception as e:
+            print(e)
+        finally:
+            conn.close()
+
+    def delete_all(self):
         ''' Clear all entries from database '''
         warnings.warn("REMOVING ALL ENTRIES FROM ORDERS TABLE")
         conn = self.connection()

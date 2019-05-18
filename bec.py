@@ -65,6 +65,39 @@ def get_order():
         return redirect('/')
     return render_template("order.html", form=form)
 
+@app.route('/cancel', methods=["GET", "POST"])
+@login_required
+def cancel_order():
+    '''
+    Search for order by name, cancel if desired.
+    '''
+    orderlist = []
+    try:
+        if request.form['name']:
+            # Query database for order with that name, display
+            orderlist = DB.get_orders_by_name(request.form['name'])
+            if len(orderlist) == 0:
+                flash("No orders found for {}".format(request.form['name']))
+            else:
+                # Store searched name as cookie to delete later
+                session['search_name'] = request.form['name']
+    except:
+        pass
+    
+    return render_template('cancel.html', orderlist=orderlist)
+
+@app.route('/cancelorder', methods=["GET"])
+@login_required
+def cancel_order_by_name():
+    '''
+    Call DB wrapper to remove all orders matching the given name
+    '''
+    if 'search_name' in session:
+        DB.delete_orders_by_name(session['search_name'])
+        flash("Order for {} deleted successfully.".format(session['search_name']))
+    else:
+        flash("Failed to delete order.")
+    return redirect('/')
 
 @app.route('/allorders', methods=["GET"])
 @login_required
@@ -75,7 +108,6 @@ def show_all_orders():
     '''
     orders_by_time = DB.get_orders_by_time()
     return render_template("all_orders.html", orders=orders_by_time)
-
 
 @app.route('/', methods=['GET'])
 def home():
