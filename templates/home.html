@@ -1,21 +1,20 @@
-<head>
-    <link rel="stylesheet" type="text/css" 
-          href="{{ url_for('static', filename='styles/style.css') }}">
-</head>
+{% extends "base.html" %}
 
+{% block title %}BEC.io{% endblock %}
 
-<body>
-    <h1 class="title">BEC Order System</h1>
-    <hr>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <li class="message">{{ message }}</li>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-    <br>
-    <form class="button" method="GET" action='/order'>
-        <input type="submit" value="Place Order"></input>
-    </form>
-</body>
+{% block head %}
+{{ super() }}
+<h1>Bec Order System</h1>
+<hr>
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<form class="button" method="GET" action='/order'>
+    <input type="submit" value="Place Order"></input>
+</form>
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{% endblock %}
