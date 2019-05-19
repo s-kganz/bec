@@ -1,19 +1,21 @@
-<body>
-    <h1>Admin Login</h1>
-    <hr>
-    {% with messages = get_flashed_messages() %}
-        {% for message in messages %}
-            <li>{{ message }}</li>
-            <br>
-        {% endfor %}
-    {% endwith %}
-    <br>
-    <form method="POST" action="/login" >
-        {{ form.hidden_tag() }}
-        {{ form.user.label }} {{ form.user() }}
-        {{ form.password.label }} {{ form.password() }}
-        <input type="submit" value="Go"></input>
-    </form>
-    
+{% extends "base.html" %}
 
-</body>
+{% block head %}
+{{ super() }}
+<h1>Admin Login</h1>
+<hr>
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<form method="POST" action="/login" >
+    {{ form.hidden_tag() }}
+    {{ form.user.label }} {{ form.user() }}
+    {{ form.password.label }} {{ form.password() }}
+    <input type="submit" value="Go"></input>
+</form>
+{% endblock %}
+    
+{% block footer %}
+{{ super() }}
+{% endblock %}

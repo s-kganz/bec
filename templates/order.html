@@ -1,33 +1,46 @@
-<body>
-    <form method="POST", action="/order">
-        <h1>Fill out Order Form Below</h1>
-        {% for field in form.errors %}
-            {{ field }}
-            <br>
-        {% endfor %}
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<h1>Complete order form below:</h1>
+<hr>
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<form method="POST", action="/order">
+    {% for field in form.errors %}
+        {{ field }}
         <br>
-        {{ form.csrf_token }}
-        {{ form.name.label }}
-        {{ form.name() }}
-        <br>
-        {{ form.location.label }}
-        {{ form.location }}
-        <br>
-        {{ form.pickup.label }} {{ form.pickup() }}
-        <br>
-        {{ form.bec.label }} {{ form.bec() }}
-        {{ form.ec.label }} {{ form.ec() }}
-        {{ form.be.label }} {{ form.be() }}
-        <br>
-        <i>Add comments, special requests here:</i>
-        <br>
-        {{ form.comments() }}
-        <br>
-        {{ form.recurring.label }} {{ form.recurring() }}
-        <br><br>
-        <input type='submit', value="Go"></input>
-    </form>
-    <form method='GET' action='/'>
-        <input type="submit" value="Also Go">
-    </form>
-</body>
+    {% endfor %}
+    <br>
+    {{ form.csrf_token }}
+    {{ form.name.label }}
+    {{ form.name() }}
+    <br>
+    {{ form.location.label }}
+    {{ form.location }}
+    <br>
+    {{ form.pickup.label }} {{ form.pickup() }}
+    <br>
+    {{ form.bec.label }} {{ form.bec() }}
+    {{ form.ec.label }} {{ form.ec() }}
+    {{ form.be.label }} {{ form.be() }}
+    <br>
+    <i>Add comments, special requests here:</i>
+    <br>
+    {{ form.comments() }}
+    <br>
+    {{ form.recurring.label }} {{ form.recurring() }}
+    <br><br>
+    <input type='submit', value="Go"></input>
+</form>
+<br>
+<form method='GET' action='/'>
+    <input type="submit" value="Return">
+</form>
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{% endblock %}
