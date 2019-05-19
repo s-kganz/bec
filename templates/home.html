@@ -1,19 +1,24 @@
-<body>
-    <h1>BEC Order System</h1>
-    <hr>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-    <br>
-    <form method="GET" action='/order'>
-        <input type="submit" value="Place Order">
-    </form>
-    <br>
-    <form method="GET" action='/login'>
+{% extends "base.html" %}
+
+{% block title %}BEC.io{% endblock %}
+
+{% block head %}
+{{ super() }}
+<h1>Bec Order System</h1>
+<hr>
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<form class="button" method="GET" action='/order'>
+    <input type="submit" value="Place Order"></input>
+</form>
+<br>
+<form method="GET" action='/login'>
         <input type="submit" value="Backend Login">
     </form>
-</body>
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{% endblock %}
