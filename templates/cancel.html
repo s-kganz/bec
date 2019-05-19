@@ -1,0 +1,41 @@
+<body>
+    <h1>Cancel an order:</h1>
+    <hr>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <br>
+    <form method="POST" action='/cancel'>
+        Name on order:
+        <input type="text" name="name">
+        <input type="submit" value="Lookup">
+    </form>
+
+    {% if orderlist|length > 0 %}
+        <h3>Orders found for {{ orderlist[0]['name'] }}:</h3>
+        <table style="width:50%" border='1'>
+                <tr>
+                    {% for key in orderlist[0].keys() if key != 'pickup_time' %}
+                        <th align="left">{{ key.replace('_', ' ').title() }}</th>
+                    {% endfor %}
+                </tr>
+                {% for order in orderlist %}
+                    <tr>
+                        {% for key in order.keys() if key != 'pickup_time' %}
+                            <td>
+                                {{ order[key] }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+        </table>
+        <form method="GET" action='/cancelorder'>
+            <input type='submit' value="Remove above orders">
+        </form>
+
+    {% endif %}
+</body>
