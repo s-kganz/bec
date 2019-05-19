@@ -1,6 +1,6 @@
 import datetime
 from flask_wtf import FlaskForm
-from wtforms import BooleanField, StringField, TextAreaField, SelectField
+from wtforms import BooleanField, StringField, TextAreaField, SelectField, PasswordField
 from wtforms.validators import DataRequired, Optional, NumberRange
 
 MAX_SANDWICHES = 10
@@ -37,4 +37,4 @@ class OrderForm(FlaskForm):
 class LoginForm(FlaskForm):
     """ FlaskForm for logging user into backend """
     user = StringField("Username: ", validators=[DataRequired()])
-    password = StringField("Password: ", validators=[DataRequired()])
+    password = PasswordField("Password: ", validators=[DataRequired()])
