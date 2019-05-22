@@ -8,11 +8,13 @@
 
 {% block content %}
 {{ super() }}
-<form method="POST" action='/cancel'>
-    Name on order:
-    <input type="text" name="name">
-    <input type="submit" value="Lookup">
-</form>
+<div class="form">
+    <form method="POST" action='/cancel'>
+        Name on order:
+        <input type="text" name="name">
+        <input type="submit" value="Lookup">
+    </form>
+</div>
 
 {% if orderlist|length > 0 %}
     <h3>Orders found for {{ orderlist[0]['name'] }}:</h3>

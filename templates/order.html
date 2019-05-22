@@ -8,33 +8,35 @@
 
 {% block content %}
 {{ super() }}
-<form method="POST", action="/order">
-    {% for field in form.errors %}
-        {{ field }}
+<div class="form">
+    <form method="POST", action="/order">
+        {% for field in form.errors %}
+            {{ field }}
+            <br>
+        {% endfor %}
         <br>
-    {% endfor %}
-    <br>
-    {{ form.csrf_token }}
-    {{ form.name.label }}
-    {{ form.name() }}
-    <br>
-    {{ form.location.label }}
-    {{ form.location }}
-    <br>
-    {{ form.pickup.label }} {{ form.pickup() }}
-    <br>
-    {{ form.bec.label }} {{ form.bec() }}
-    {{ form.ec.label }} {{ form.ec() }}
-    {{ form.be.label }} {{ form.be() }}
-    <br>
-    <i>Add comments, special requests here:</i>
-    <br>
-    {{ form.comments() }}
-    <br>
-    {{ form.recurring.label }} {{ form.recurring() }}
-    <br><br>
-    <input type='submit', value="Go"></input>
-</form>
+        {{ form.csrf_token }}
+        {{ form.name.label }}
+        {{ form.name() }}
+        <br>
+        {{ form.location.label }}
+        {{ form.location }}
+        <br>
+        {{ form.pickup.label }} {{ form.pickup() }}
+        <br>
+        {{ form.bec.label }} {{ form.bec() }}
+        {{ form.ec.label }} {{ form.ec() }}
+        {{ form.be.label }} {{ form.be() }}
+        <br>
+        <i>Add comments, special requests here:</i>
+        <br>
+        {{ form.comments() }}
+        <br>
+        {{ form.recurring.label }} {{ form.recurring() }}
+        <br><br>
+        <input type='submit', value="Go"></input>
+    </form>
+</div>
 <br>
 <form method='GET' action='/'>
     <input type="submit" value="Return">
