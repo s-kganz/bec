@@ -1,28 +1,37 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset='UTF-8'>
-        <meta name='description' content='BEC Order System'>
-        <meta name='author' content='https://github.com/s-kganz/bec'>
 
+<head>
+    <meta charset='UTF-8'>
+    <meta name='description' content='BEC Order System'>
+    <meta name='author' content='https://github.com/s-kganz/bec'>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <div id="header">
         {% block head %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
         <title>{% block title %} {% endblock %}</title>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <li class="message">{{ message }}</li>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
         {% endblock %}
-    </head>
-    <body>
-        <div id='content'>{% block content %} {% endblock %}</div>
-        <div id='footer'>
-            {% block footer %}
-            Made with &hearts; by <a href='http://sigepnyd.org/'>SigEp NY&#916;.</a>
-            {% endblock %}
-        </div>
-    </body>
+    </div>
+</head>
+
+<body>
+    <div id='content'>
+        {% block content %}
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <li class="message">{{ message }}</li>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        {% endblock %}
+    </div>
+    <div id='footer'>
+        {% block footer %}
+        Made with &hearts; by <a href='http://sigepnyd.org/'>SigEp NY&#916;.</a>
+        {% endblock %}
+    </div>
+</body>
+
 </html>
