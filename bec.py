@@ -109,6 +109,10 @@ def show_all_orders():
     orders_by_time = DB.get_orders_by_time()
     return render_template("all_orders.html", orders=orders_by_time)
 
+@app.route('/about', methods=["GET"])
+def about():
+    return render_template("about.html")
+
 @app.route('/', methods=['GET'])
 def home():
     return render_template("home.html")
