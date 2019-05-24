@@ -1,4 +1,30 @@
+li {
+    float: left;
+}
+
+li a{
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-family: sans-serif;
+    text-align: center;
+    padding: 14px 16px;
+}
+
+li a:hover{
+    background-color: crimson;
+}
+
+li.nav-title{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 12px;
+}
+
 li.message {
+    display: block;
     border-color: forestgreen;
     background-color: darkseagreen;
     border-radius: 10px;
@@ -20,6 +46,19 @@ div.form{
     width: 50%;
 }
 
-#header{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+ul.navbar{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: rgb(255, 71, 108);
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+#content{
+    padding-top: 40px;
 }
