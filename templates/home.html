@@ -4,12 +4,13 @@
 
 {% block head %}
 {{ super() }}
-<h1>Bec Order System</h1>
+<h1 class="page-title">Bec Order System</h1>
 <hr>
 {% endblock %}
 
 {% block content %}
 {{ super() }}
+<br>
 <form class="button" method="GET" action='/order'>
     <input type="submit" value="Place Order"></input>
 </form>
