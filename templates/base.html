@@ -9,14 +9,22 @@
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <div id="header">
-        {% block head %}
+        
+        <ul class="navbar">
+            <li class="nav-title">bec.io</li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/order">Place Order</a></li>
+            <li><a href="/login">Login</a></li>
+        </ul>
         <title>{% block title %} {% endblock %}</title>
-        {% endblock %}
     </div>
 </head>
 
 <body>
     <div id='content'>
+        {% block head %}
+        {% endblock %}
+
         {% block content %}
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
