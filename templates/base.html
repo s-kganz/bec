@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <div id="header">
-        
+
         <ul class="navbar">
             <li class="nav-title">bec.io</li>
             <li><a href="/">Home</a></li>
@@ -27,27 +27,27 @@
         {% endblock %}
 
         {% block content %}
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                    <li class="message">{{ message }}</li>
-                    <br>
-                    <br>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-        {% endblock %}
-    </div>
-    <div id='footer'>
-        {% block footer %}
-        <span>
-            Made with &hearts; by <a href='http://sigepnyd.org/'>SigEp NY&#916;.</a>
-        </span>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <li class="message">{{ message }}</li>
         <br>
-        <img src="{{ url_for('static', filename='crest.png') }}" alt="Sigep Crest"
-             height="95">
+        <br>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
         {% endblock %}
     </div>
 </body>
+
+<footer id="footer">
+    {% block footer %}
+    <span>
+        Made with &hearts; by <a href='http://sigepnyd.org/'>SigEp NY&#916;.</a>
+    </span>
+    <br>
+    <img src="{{ url_for('static', filename='crest.png') }}" alt="Sigep Crest" height="95">
+    {% endblock %}
+</footer>
 
 </html>
