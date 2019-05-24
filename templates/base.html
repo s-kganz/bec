@@ -40,7 +40,12 @@
     </div>
     <div id='footer'>
         {% block footer %}
-        Made with &hearts; by <a href='http://sigepnyd.org/'>SigEp NY&#916;.</a>
+        <span>
+            Made with &hearts; by <a href='http://sigepnyd.org/'>SigEp NY&#916;.</a>
+        </span>
+        <br>
+        <img src="{{ url_for('static', filename='crest.png') }}" alt="Sigep Crest"
+             height="95">
         {% endblock %}
     </div>
 </body>
