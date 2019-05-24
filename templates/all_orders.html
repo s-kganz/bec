@@ -20,13 +20,23 @@
             {% endfor %}
         </tr>
         {% for order in orderlist %}
-            <tr>
-                {% for key in order.keys() if key != 'pickup_time' %}
-                    <td>
-                        {{ order[key] }}
-                    </td>
-                {% endfor %}
-            </tr>
+            {% if loop.index is divisibleby 2 %}
+                <tr class="gray">
+                    {% for key in order.keys() if key != 'pickup_time' %}
+                        <td>
+                            {{ order[key] }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% else %}
+                <tr>
+                    {% for key in order.keys() if key != 'pickup_time' %}
+                        <td>
+                            {{ order[key] }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endif %}
         {% endfor %}
     </table>
     {% else %}

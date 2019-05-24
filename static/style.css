@@ -94,3 +94,16 @@ ul.navbar{
 #footer a:hover{
     color: white;
 }
+
+th{
+    font-weight: bold;
+}
+
+table, th, td{
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+tr.gray{
+    background-color: lightgrey;
+}
