@@ -18,20 +18,30 @@
 
 {% if orderlist|length > 0 %}
     <h3>Orders found for {{ orderlist[0]['name'] }}:</h3>
-    <table style="width:50%" border='1'>
+    <table>
             <tr>
                 {% for key in orderlist[0].keys() if key != 'pickup_time' %}
                     <th align="left">{{ key.replace('_', ' ').title() }}</th>
                 {% endfor %}
             </tr>
             {% for order in orderlist %}
-                <tr>
-                    {% for key in order.keys() if key != 'pickup_time' %}
-                        <td>
-                            {{ order[key] }}
-                        </td>
-                    {% endfor %}
-                </tr>
+                {% if loop.index is divisibleby 2 %}
+                    <tr class='gray'>
+                        {% for key in order.keys() if key != 'pickup_time' %}
+                            <td>
+                                {{ order[key] }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% else %}
+                    <tr>
+                        {% for key in order.keys() if key != 'pickup_time' %}
+                            <td>
+                                {{ order[key] }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endif %}
             {% endfor %}
     </table>
     <form method="GET" action='/cancelorder'>
