@@ -11,8 +11,9 @@
 <div class="form">
     <form method="POST" action="/login" >
         {{ form.hidden_tag() }}
-        {{ form.user.label }} {{ form.user() }}
-        {{ form.password.label }} {{ form.password() }}
+        {{ form.user.label }}<br>{{ form.user() }}<br>
+        {{ form.password.label }}<br>{{ form.password() }}<br>
+        <hr>
         <input type="submit" value="Go"></input>
     </form>
 </div>
