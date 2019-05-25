@@ -1,6 +1,10 @@
+/* Global parameters */
+
 * {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+/* Navigation bar */
 
 li {
     float: left;
@@ -31,24 +35,6 @@ li.nav-title{
     padding: 12px;
 }
 
-li.message {
-    display: block;
-    border-color: forestgreen;
-    background-color: darkseagreen;
-    border-radius: 10px;
-    padding: 10px;
-    color: white;
-}
-
-div.form{
-    border-style: solid;
-    background-color: rgb(196, 196, 196);
-    border-color: black;
-    border-radius: 10px;
-    padding: 10px;
-    width: 50%;
-}
-
 ul.navbar{
     list-style-type: none;
     padding: 0;
@@ -61,6 +47,43 @@ ul.navbar{
     width: 100%;
     overflow: hidden;
 }
+
+/* Flashed message */
+
+li.message {
+    display: block;
+    border-color: forestgreen;
+    background-color: darkseagreen;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+}
+
+/* Forms */
+
+div.form{
+    border-style: solid;
+    background-color: white;
+    border-color: rgb(143, 143, 143);
+    border-radius: 10px;
+    padding: 10px;
+    width: 25%;
+}
+
+input[type=submit]{
+    text-align: center;
+    border: none;
+    min-width: 50px;
+    padding: 5px 10px 5px 10px;
+    background-color: crimson;
+    color: white;
+}
+
+input[type=submit]:hover{
+    background-color: rgb(221, 64, 96);
+}
+
+/* Separate content and footer divs, make sticky footer */
 
 #content{
     padding-top: 30px;
