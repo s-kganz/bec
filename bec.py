@@ -4,7 +4,7 @@ from flask_login import current_user, login_user, login_required
 from forms import OrderForm, LoginForm
 from os import urandom as make_key
 
-from secrets.config import Config, TestingConfig, DebugConfig
+from config import Config, TestingConfig, DebugConfig
 
 app = Flask(__name__)
 app.secret_key = make_key(16)
