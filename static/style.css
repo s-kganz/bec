@@ -104,7 +104,13 @@ input[type=submit]:hover{
 }
 
 #footer span{
+    padding-left: 5px;
     padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+#footer img{
+    padding-left: 5px;
     margin-bottom: 10px;
 }
 
